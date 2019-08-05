@@ -1,0 +1,46 @@
+{% extends 'admin/admin_base.html' %}
+{% block contents %}
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>微电影管理系统</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 标签管理</a></li>
+                <li class="active">添加标签</li>
+            </ol>
+        </section>
+        <section class="content" id="showcontent">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">添加标签</h3>
+                        </div>
+                        {% with messages = get_flashed_messages(category_filter=["add"]) %}
+                            {% if messages %}
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                    {{ messages[0] }}
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <form action="" method="post" novalidate role="form">
+                    {{ form.csrf_token }}
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="input_name">标签名称</label>
+                                {{ form.title }}
+                                {% for foo in form.title.errors %}
+                                    <div class="col-md-12" id="input_user" style="color: red">{{ foo }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="box-footer " >
+                            {{ form.login }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

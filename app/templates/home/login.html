@@ -1,0 +1,69 @@
+{% extends 'home/nav.html' %}
+{% block css %}
+    <style>
+        .navbar-brand > img {
+            display: inline;
+        }
+    </style>
+
+{% endblock %}
+{% block contents %}
+    <div class="container" style="margin-top:120px">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-log-in"></span>&nbsp;会员登录</h3>
+                </div>
+                <div class="panel-body">
+                    <div style="text-align: center" class="login-box-body">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <p style="color: red" class="login-box-msg">
+                                    {{ messages[0] }}
+                                </p>
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    <form role="form" novalidate method="post" action="">
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="input_contact"><span
+                                        class="glyphicon glyphicon-user"></span>{{ form.user.label }}</label>
+                                {{ form.user }}
+                            </div>
+                            {% for foo in form.user.errors %}
+                                <div class="col-md-12 " style="color: red;" id="error_contact">{{ foo }}</div>
+                            {% endfor %}
+
+                            <div class="form-group">
+                                <label for="input_password"><span
+                                        class="glyphicon glyphicon-lock"></span>{{ form.pwd.label }}</label>
+                                {{ form.pwd }}
+                            </div>
+                            {% for foo in form.pwd.errors %}
+                                <div class="col-md-12" style="color: red;" id="error_password">{{ foo }}</div>
+                            {% endfor %}
+                            {{ form.csrf_token }}
+                            {{ form.login }}
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(function () {
+            new WOW().init();
+        });
+        $(document).ready(function () {
+            $("img.lazy").lazyload({
+                effect: "fadeIn"
+            });
+        });
+    </script>
+
+{% endblock %}

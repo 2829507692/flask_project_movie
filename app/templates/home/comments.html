@@ -1,0 +1,104 @@
+{% extends 'home/nav.html' %}
+{% from 'pagenition.html' import paginate as pg %}
+{% block css %}
+    <style>
+        .navbar-brand > img {
+            display: inline;
+        }
+
+        .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+            padding-right: 3px;
+            padding-left: 3px;
+        }
+
+        .media {
+            padding: 3px;
+            border: 1px solid #ccc
+        }
+    </style>
+{% endblock %}
+{% block contents %}
+    <div class="container" style="margin-top:76px">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="{{ url_for('home.user') }}" class="list-group-item">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;会员中心
+                </a>
+                <a href="{{ url_for('home.pwd') }}" class="list-group-item">
+                    <span class="glyphicon glyphicon-lock"></span>&nbsp;修改密码
+                </a>
+                <a href="{{ url_for('home.comments',page=1) }}" class="active  list-group-item">
+                    <span class="glyphicon glyphicon-comment"></span>&nbsp;评论记录
+                </a>
+                <a href="{{ url_for('home.loginlog',page=1) }}" class="list-group-item">
+                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;登录日志
+                </a>
+                <a href="{{ url_for('home.moviecol',page=1) }}" class="list-group-item">
+                    <span class="glyphicon glyphicon-heart"></span>&nbsp;收藏电影
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;评论记录</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="commentList">
+                        {% for foo in con.items %}
+                            <li class="item cl">
+                                <a href="user.html">
+                                    <i class="avatar size-L radius">
+                                        {% if foo.user.avatar %}
+                                            <img  src="{{ url_for('files',filename=foo.user.avatar) }}" style="width: 50px;height: 50px" class="img-circle"
+                                                 style="border:1px solid #abcdef;">
+                                        {% else %}
+                                            <img alt="50x50" data-src="holder.js/50x50" class="img-circle"
+                                                 style="border:1px solid #abcdef;">
+                                        {% endif %}
+                                    </i>
+                                </a>
+                                <div class="comment-main">
+                                    <header class="comment-header">
+                                        <div class="comment-meta">
+                                            <a class="comment-author"
+                                               href="{{ url_for('home.user') }}">{{session.user }}</a>
+                                            评论于
+                                            <time>
+                                                {{  foo.addtime}}
+                                            </time>
+                                        </div>
+                                    </header>
+                                    <div class="comment-body">
+                                        <p>{{ foo.content|safe }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="col-md-12 text-center">
+                        <nav aria-label="Page navigation">
+                            {{ pg(con,'home.comments') }}
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $(function () {
+            new WOW().init();
+        })
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("img.lazy").lazyload({
+                effect: "fadeIn"
+            });
+        });
+
+    </script>
+{% endblock %}

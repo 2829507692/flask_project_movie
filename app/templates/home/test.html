@@ -1,0 +1,45 @@
+                <div class="col-md-3">
+                    {% for movie in page_data.items %}
+                        <div class="movielist text-center">
+                            {% if movie.logo %}
+                                <img class="media-object" style="width: 130px"
+                                     src="{{ url_for('files',filename=movie.logo) }}"
+                                     alt="">
+                            {% else %}
+                                <img class="media-object" data-src="holder.js/262x166" alt="">
+                            {% endif %}
+                            <div class="text-left" style="margin-left:auto;margin-right:auto;width:210px;">
+                                <span style="color:#999;font-style: italic;">{{ movie.name }}</span><br>
+                                <div>
+                                    {% for foo in range(movie.score) %}
+                                        <span class="glyphicon glyphicon-star" style="color:#FFD119"></span>
+                                    {% endfor %}
+                                    {% for foo in range(5-movie.score) %}
+                                        <span class="glyphicon glyphicon-star-empty" style="color:#FFD119"></span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <a href="play.html" class="btn btn-primary" target="_blank" role="button"><span
+                                    class="glyphicon glyphicon-play"></span>&nbsp;播放</a>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-3">
+                    <div class="movielist text-center">
+                        <!--<img data-original="holder.js/262x166"
+                                 class="img-responsive lazy center-block" alt="">-->
+                        <img src="holder.js/262x166" class="img-responsive center-block" alt="">
+                        <div class="text-left" style="margin-left:auto;margin-right:auto;width:210px;">
+                            <span style="color:#999;font-style: italic;">环太平洋</span><br>
+                            <div>
+                                <span class="glyphicon glyphicon-star" style="color:#FFD119"></span>
+                                <span class="glyphicon glyphicon-star" style="color:#FFD119"></span>
+                                <span class="glyphicon glyphicon-star" style="color:#FFD119"></span>
+                                <span class="glyphicon glyphicon-star-empty" style="color:#FFD119"></span>
+                                <span class="glyphicon glyphicon-star-empty" style="color:#FFD119"></span>
+                            </div>
+                        </div>
+                        <a href="play.html" class="btn btn-primary" target="_blank" role="button"><span
+                                class="glyphicon glyphicon-play"></span>&nbsp;播放</a>
+                    </div>
+                </div>

@@ -1,0 +1,68 @@
+{% extends 'admin/admin_base.html' %}
+{% block css %}
+    <style>
+        ul li {
+            list-style: none;
+        }
+    </style>
+{% endblock %}
+{% block contents %}
+    <div class="content-wrapper">
+        <!--内容-->
+        <section class="content-header">
+            <h1>微电影管理系统</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 管理员管理</a></li>
+                <li class="active">添加管理员</li>
+            </ol>
+        </section>
+        <section class="content" id="showcontent">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">添加管理员</h3>
+                        </div>
+                        <form role="form" action="" method="post" novalidate>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="input_name">{{ form.name.label }}</label>
+                                    {{ form.name }}
+                                    {% for foo in form.name.errors %}
+                                        <div class="col-md-12" id="input_name" style="color: red">{{ foo }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_pwd">{{ form.pwd.label }}</label>
+                                    {{ form.pwd }}
+                                    {% for foo in form.pwd.errors %}
+                                        <div class="col-md-12" id="input_pwd" style="color: red">{{ foo }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_re_pwd">{{ form.re_pwd.label }}</label>
+                                    {{ form.re_pwd }}
+                                    {% for foo in form.re_pwd.errors %}
+                                        <div class="col-md-12" id="input_re_pwd" style="color: red">{{ foo }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_role_id">{{ form.role.label }}</label>
+                                    {{ form.role }}
+                                    {% for foo in form.role.errors %}
+                                        <div class="col-md-12" id="input_role_id" style="color: red">{{ foo }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                {{ form.submit }}
+                                {{ form.csrf_token }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--内容-->
+    </div>
+{% endblock %}

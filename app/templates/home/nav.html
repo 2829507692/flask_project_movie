@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    <title>微电影</title>
+    <link rel="shortcut icon" href="{{ url_for('static',filename='home/base/images/logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='home/base/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='home/base/css/bootstrap-movie.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='home/base/css/animate.css') }}">
+    {% block css %}
+
+    {% endblock %}
+    <style>
+        .clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<div class="clearfix">
+ <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="javascript:;" class="navbar-brand" style="width:250px;">
+                <img src="{{ url_for('static',filename='home/base/images/logo.png') }}" style="height:30px;">&nbsp;微电影
+            </a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <form class="navbar-form navbar-left" role="search" style="margin-top:15px;">
+                <div class="form-group input-group">
+                    <input type="text"class="form-control" placeholder="请输入电影名！">
+                    <span class="input-group-btn">
+                        <a id='search_button'class="btn btn-default"><span
+                                class="glyphicon glyphicon-search"></span>&nbsp;搜索</a>
+                    </span>
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="curlink" href="{{ url_for('home.index') }}"><span class="glyphicon glyphicon-film"></span>&nbsp;首页</a>
+                </li>
+                <li>
+                    <a class="curlink" href="{{ url_for('home.login') }}"><span
+                            class="glyphicon glyphicon-log-in"></span>&nbsp;登录</a>
+                </li>
+                <li>
+                    <a class="curlink" href="{{ url_for('home.register') }}"><span
+                            class="glyphicon glyphicon-plus"></span>&nbsp;注册</a>
+                </li>
+                <li>
+                    <a class="curlink" href="{{ url_for('home.logout') }}"><span
+                            class="glyphicon glyphicon-log-out"></span>&nbsp;退出</a>
+                </li>
+                <li>
+                    <a class="curlink" href="{{ url_for('home.user') }}"><span class="glyphicon glyphicon-user"></span>
+                        {% if session.user %}
+                            {{ session.user }}
+                        {% else %}
+                            会员中心
+                        {% endif %}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</div>
+
+{% block contents %}
+
+{% endblock %}
+<script src="{{ url_for('static',filename='home/base/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename='home/base/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static',filename='home/base/js/jquery.singlePageNav.min.js') }}"></script>
+<script src="{{ url_for('static',filename='home/base/js/wow.min.js') }}"></script>
+<script src="{{ url_for('static',filename='home/base/js/lazyload.js') }}"></script>
+<script src="//cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+{% block script %}
+{% endblock %}
+<script>
+    $(document).ready(function() {
+        $("#search_button").click(function () {
+            value=$(this).parents().prev().val();
+            location.href="{{url_for('home.search')}}" +"?key="+value
+        })
+    });
+</script>
+</body>
+</html>
